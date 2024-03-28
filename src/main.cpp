@@ -5,7 +5,7 @@
 
 // How many leds in your strip?
 #define NUM_LEDS 2
-#define LED_BRIGHTNESS 255 //0-255
+#define LED_BRIGHTNESS 64 //0-255
 #define DELAY_MS 500
 
 // For led chips like WS2812, which have a data line, ground, and power, you just
@@ -16,11 +16,10 @@
 CRGB leds[NUM_LEDS];
 
 // Define an array of colors to cycle through
-#define NUM_COLORS 4
-CRGB colors[NUM_COLORS] = { CRGB::White, 
-                            CRGB::Red,
-                            CRGB::Green, 
-                            CRGB::Blue };
+CRGB colors[] = { CRGB::White, 
+                  CRGB::Red,
+                  CRGB::Green, 
+                  CRGB::Blue };
 
 void setup() { 
     // Check the FastLED library for other options than NEOPIXEL
@@ -28,17 +27,21 @@ void setup() {
     FastLED.setBrightness(LED_BRIGHTNESS);
 }
 
-void loop() { 
+void loop() {
+  //Get the number of elements in the colors array
+  int NUM_COLORS = sizeof(colors) / sizeof(colors[0]);
+  //Loop through colors
   for(int j=0; j<NUM_COLORS; j++) {
+    //Loop through LEDs
     for(int i=0; i<NUM_LEDS; i++) {
-    // Turn the LED on, then pause
-    leds[i] = colors[j];
-    FastLED.show();
-    delay(DELAY_MS);
-    // Now turn the LED off, then pause
-    leds[i] = CRGB::Black;
-    FastLED.show();
-    delay(DELAY_MS);
+      // Turn the LED on, then pause
+      leds[i] = colors[j];
+      FastLED.show();
+      delay(DELAY_MS);
+      // Now turn the LED off, then pause
+      leds[i] = CRGB::Black;
+      FastLED.show();
+      delay(DELAY_MS);
     }
   }
 }
