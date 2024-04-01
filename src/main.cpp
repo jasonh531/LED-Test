@@ -18,6 +18,7 @@ CRGB leds[NUM_LEDS];
 // Define an array of colors to cycle through
 CRGB colors[] = { CRGB::White, 
                   CRGB::Red,
+                  CRGB::Yellow,
                   CRGB::Green, 
                   CRGB::Blue };
 
